@@ -3,10 +3,11 @@
 
 <!-- views/index.erb -->
 <% @recipes.each_with_index do |recipe, index| %>
+  <% status = recipe.recipe_done? ? "[X]" : "[ ]" %>
   <li>
-    <%= "#{index + 1}. #{recipe.is_recipe_done} - #{recipe.name} - (#{recipe.rating}/ 5) - Time #{recipe.prep_time}" %>
+    <%= "#{index + 1}. #{status} - #{recipe.name} - (#{recipe.rating}/ 5) - Time #{recipe.prep_time}" %>
     <a href="/destroy?index=<%="#{index}"%>">Delete</a>
-    <% if recipe.is_recipe_done = "[ ]" %>
+    <% unless recipe.recipe_done? %>
     <a href="/mark_as_done?index=<%="#{index}"%>">Mark as Done</a>
     <% end %>
   </li>

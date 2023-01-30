@@ -30,11 +30,10 @@ end
 
 get "/mark_as_done" do
   @cookbook = Cookbook.new
+  p @cookbook
   index = params['index'].to_i
   @cookbook.mark_recipe_as_done_update(index)
-  binding.pry
   @recipes = @cookbook.recipes
-  break
   redirect to "/"
 end
 
@@ -44,7 +43,7 @@ post "/recipes" do
   description = @params['description']
   rating = @params['rating']
   prep_time = @params['prep_time']
-  recipe = Recipe.new(name, description, rating, prep_time)
+  recipe = Recipe.new(name: name, description: description, rating: rating, prep_time: prep_time)
   @cookbook.create(recipe)
   @recipes = @cookbook.recipes
   redirect to "/"
@@ -59,7 +58,7 @@ end
 get "/save" do
   @url = @params['url']
   @scrap = ScrapeRecipeService.new(@url)
-  @recipe = Recipe.new(@scrap.name, @scrap.description, @scrap.rating, @scrap.prep_time)
+  @recipe = Recipe.new(name: @scrap.name, description: @scrap.description, rating: @scrap.rating, prep_time: @scrap.prep_time)
   @cookbook = Cookbook.new
   @cookbook.create(@recipe)
   @recipes = @cookbook.recipes
