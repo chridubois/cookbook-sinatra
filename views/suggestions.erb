@@ -1,0 +1,16 @@
+<h1>Recipe suggestions for <%="#{@keyword}"%></h1>
+<p>List of recipes</p>
+
+<!-- views/index.erb -->
+<% @list.each_with_index do |recipe, index| %>
+  <li>
+    <%= "#{index + 1}. #{recipe[0]}" %>
+    <a href="/save?url=<%="#{recipe[1]}"%>">Save</a>
+  </li>
+<% end %>
+<br><br>
+<p>Let's create your own Recipe :</p>
+<a href="/new" target="_blank">HERE</a>
+<br><br>
+<p>Let's import Recipes from the web :</p>
+<a href="/import" target="_blank">HERE</a>

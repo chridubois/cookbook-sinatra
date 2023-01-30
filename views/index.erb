@@ -1,0 +1,19 @@
+<h1>The Chris's COOKBOOK</h1>
+<p>List of all recipes</p>
+
+<!-- views/index.erb -->
+<% @recipes.each_with_index do |recipe, index| %>
+  <li>
+    <%= "#{index + 1}. #{recipe.is_recipe_done} - #{recipe.name} - (#{recipe.rating}/ 5) - Time #{recipe.prep_time}" %>
+    <a href="/destroy?index=<%="#{index}"%>">Delete</a>
+    <% if recipe.is_recipe_done = "[ ]" %>
+    <a href="/mark_as_done?index=<%="#{index}"%>">Mark as Done</a>
+    <% end %>
+  </li>
+<% end %>
+<br><br>
+<p>Let's create your own Recipe :</p>
+<a href="/new" target="_blank">HERE</a>
+<br><br>
+<p>Let's import Recipes from the web :</p>
+<a href="/import" target="_blank">HERE</a>
